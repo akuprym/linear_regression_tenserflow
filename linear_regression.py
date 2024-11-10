@@ -49,7 +49,7 @@ model.compile(optimizer=tf.keras.optimizers.RMSprop(learning_rate=0.005), loss="
 history = model.fit(
     X_train_1d, 
     y_train, 
-    batch_size=16, 
+    batch_size=18, 
     epochs=101, 
     validation_split=0.3,
 )
