@@ -53,3 +53,45 @@ history = model.fit(
     epochs=101, 
     validation_split=0.3,
 )
+
+def plot_loss(history):
+    plt.figure(figsize=(20,5))
+    plt.plot(history.history['loss'], 'g', label='Training Loss')
+    plt.plot(history.history['val_loss'], 'b', label='Validation Loss')
+    plt.xlim([0, 100])
+    plt.ylim([0, 300])
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.grid(True)
+
+plot_loss(history)
+
+# Predict the median price of a home with [3, 4, 5, 6, 7] rooms.
+x = np.array([3, 4, 5, 6, 7]).reshape(-1, 1)
+y_pred = model.predict(x)
+for idx in range(len(x)):
+    print(f"Predicted price of a home with {x[idx][0]} rooms: ${int(y_pred[idx][0] * 10) / 10}K")
+
+# Generate feature data that spans the range of interest for the independent variable.
+x = np.linspace(3, 9, 10)
+
+# Use the model to predict the dependent variable.
+y = model.predict(x)
+
+def plot_data(x_data, y_data, x, y, title=None):
+    
+    plt.figure(figsize=(15,5))
+    plt.scatter(x_data, y_data, label='Ground Truth', color='green', alpha=0.5)
+    plt.plot(x, y, color='k', label='Model Predictions')
+    plt.xlim([3,9])
+    plt.ylim([0,60])
+    plt.xlabel('Average Number of Rooms')
+    plt.ylabel('Price [$K]')
+    plt.title(title)
+    plt.grid(True)
+    plt.legend()
+
+plot_data(X_train_1d, y_train, x, y, title='Training Dataset')
+
+plot_data(X_test_1d, y_test, x, y, title='Test Dataset')
