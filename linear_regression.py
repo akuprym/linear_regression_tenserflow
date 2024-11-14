@@ -38,10 +38,8 @@ plt.scatter(X_train_1d[:], y_train, color="green", alpha=0.5)
 
 model = Sequential()
 
-# Define the model consisting of a single neuron.
 model.add(Dense(units=1, input_shape=(1,)))
 
-# Display a summary of the model architecture.
 model.summary()
 
 model.compile(optimizer=tf.keras.optimizers.RMSprop(learning_rate=0.005), loss="mse")
@@ -73,10 +71,9 @@ y_pred = model.predict(x)
 for idx in range(len(x)):
     print(f"Predicted price of a home with {x[idx][0]} rooms: ${int(y_pred[idx][0] * 10) / 10}K")
 
-# Generate feature data that spans the range of interest for the independent variable.
+# Generate feature data.
 x = np.linspace(3, 9, 10)
 
-# Use the model to predict the dependent variable.
 y = model.predict(x)
 
 def plot_data(x_data, y_data, x, y, title=None):
